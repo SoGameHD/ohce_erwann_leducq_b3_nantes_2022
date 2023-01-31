@@ -1,4 +1,8 @@
 ﻿using OHCE;
-using OHCE.Console.Adapters;
+using OHCE.Langues;
 
-var ohce = new Ohce(new SystemLangueAdapter(), SystemTimePériodeJournéeAdapter.PériodeActuelle);
+ILangue langue = new LangueAnglaise(); // Il faudrat l'automatiser par la suite
+
+var ohce = new Ohce(langue);
+Console.WriteLine(langue.enterString);
+Console.WriteLine(ohce.Palindrome(Console.ReadLine() ?? string.Empty));

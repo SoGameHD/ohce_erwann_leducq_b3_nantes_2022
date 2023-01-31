@@ -11,7 +11,7 @@ public class OhceTest
         "ALORS elle est renvoyée en miroir")]
     public void MiroirTest()
     {
-        var ohce = OhceBuilder.Default;
+        var ohce = OhceBuilder.Base;
 
         // QUAND on entre une chaîne de caractère
         var sortie = ohce.Palindrome("toto");
@@ -49,37 +49,26 @@ public class OhceTest
         new LangueFrançaise()
     };
 
-    private static readonly IEnumerable<PériodeJournée> Périodes = new PériodeJournée[]
-    {
-        PériodeJournée.Matin, 
-        PériodeJournée.AprèsMidi, 
-        PériodeJournée.Soir, 
-        PériodeJournée.Nuit, 
-        PériodeJournée.Defaut
-    };
-
     public static IEnumerable<object[]> LanguesSeules => new CartesianData(Langues);
-    public static IEnumerable<object[]> LanguesEtPériodes => new CartesianData(Langues, Périodes);
 
     [Theory(DisplayName = "ETANT DONNE un utilisateur parlant une langue" +
                           "ET que la période de la journée est <période>" +
                           "QUAND l'app démarre " +
                           "ALORS <bonjour> de cette langue à cette période est envoyé")]
-    [MemberData(nameof(LanguesEtPériodes))]
-    public void DémarrageTest(ILangue langue, PériodeJournée période)
+    [MemberData(nameof(LanguesSeules))]
+    public void DémarrageTest(ILangue langue)
     {
         // ETANT DONNE un utilisateur parlant une langue
         // ET que la période de la journée est <période>
         var ohce = new OhceBuilder()
             .AyantPourLangue(langue)
-            .AyantPourPériodeDeLaJournée(période)
             .Build();
 
         // QUAND l'app démarre
         var sortie = ohce.Palindrome(string.Empty);
 
         // ALORS <bonjour> de cette langue à cette période est envoyé
-        Assert.StartsWith(langue.DireBonjour(période), sortie);
+        Assert.StartsWith(langue.DireBonjour, sortie);
     }
 
     [Theory(DisplayName = "ETANT DONNE un utilisateur parlant une langue" +

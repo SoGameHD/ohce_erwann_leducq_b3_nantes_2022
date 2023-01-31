@@ -5,30 +5,39 @@ namespace OHCE;
 public class Ohce
 {
     private readonly ILangue _langue;
-    private readonly PériodeJournée _périodeJournée;
 
-    public Ohce(ILangue langue, PériodeJournée périodeJournée)
+    public Ohce(ILangue langue)
     {
         _langue = langue;
-        _périodeJournée = périodeJournée;
     }
 
     public string Palindrome(string input)
     {
-        var stringBuilder = 
-            new StringBuilder(_langue.DireBonjour(_périodeJournée));
-
-        var reversed = new string(
-            input.Reverse().ToArray()
-        );
-
-        stringBuilder.Append(reversed);
+        var bonjour = new string(Bonjour());
+        var auRevoir = new string(AuRevoir());
+        var fullString = new StringBuilder(bonjour + '\n');
+        var reversed = new string(input.Reverse().ToArray());
 
         if (reversed.Equals(input))
-            stringBuilder.Append(_langue.BienDit);
+        {
+            fullString.Append("Palindrome : " + reversed + "\n" + _langue.BienDit + "\n");
+        }
+        else
+        {
+            fullString.Append(_langue.reverseWord + " : " + reversed + "\n");
+        }
 
-        stringBuilder.Append(_langue.AuRevoir);
+        fullString.Append(auRevoir);
+        return fullString.ToString();
+    }
 
-        return stringBuilder.ToString();
+    public string Bonjour()
+    {
+        return _langue.Bonjour;
+    }
+
+    public string AuRevoir()
+    {
+        return _langue.AuRevoir;
     }
 }

@@ -2,18 +2,11 @@
 {
     public class LangueFrançaise : ILangue
     {
-        /// <inheritdoc />
         public string BienDit => Expressions.Français.BienDit;
-
-        /// <inheritdoc />
-        public string DireBonjour(PériodeJournée période)
-        {
-            return période == PériodeJournée.Soir 
-                ? Expressions.Français.Bonsoir 
-                : Expressions.Français.Bonjour;
-        }
-
-        /// <inheritdoc />
+        public string Bonjour => Expressions.Français.Bonjour;
         public string AuRevoir => Expressions.Français.AuRevoir;
+        public string useLanguage => Expressions.Français.useLanguage;
+        public string enterString => Expressions.Français.enterString;
+        public string reverseWord => Expressions.Français.reverseWord;
     }
 }
