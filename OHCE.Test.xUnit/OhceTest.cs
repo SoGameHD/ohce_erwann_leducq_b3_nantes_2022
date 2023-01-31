@@ -43,6 +43,15 @@ public class OhceTest
             sortie);
     }
 
+    private static readonly IEnumerable<PeriodeJournee> Périodes = new PeriodeJournee[]
+   {
+        PeriodeJournee.Defaut,
+        PeriodeJournee.Matin,
+        PeriodeJournee.AprèsMidi,
+        PeriodeJournee.Soir,
+        PeriodeJournee.Nuit
+   };
+
     private static readonly IEnumerable<ILangue> Langues = new ILangue[]
     {
         new LangueAnglaise(), 
@@ -50,32 +59,34 @@ public class OhceTest
     };
 
     public static IEnumerable<object[]> LanguesSeules => new CartesianData(Langues);
+    public static IEnumerable<object[]> LanguesEtPériodes => new CartesianData(Langues, Périodes);
 
     [Theory(DisplayName = "ETANT DONNE un utilisateur parlant une langue" +
                           "ET que la période de la journée est <période>" +
                           "QUAND l'app démarre " +
                           "ALORS <bonjour> de cette langue à cette période est envoyé")]
     [MemberData(nameof(LanguesSeules))]
-    public void DémarrageTest(ILangue langue)
+    public void DémarrageTest(ILangue langue, PeriodeJournee periode)
     {
         // ETANT DONNE un utilisateur parlant une langue
         // ET que la période de la journée est <période>
         var ohce = new OhceBuilder()
             .AyantPourLangue(langue)
+            .AyantPourPeriodeDeLaJournee(periode)
             .Build();
 
         // QUAND l'app démarre
         var sortie = ohce.Palindrome(string.Empty);
 
         // ALORS <bonjour> de cette langue à cette période est envoyé
-        Assert.StartsWith(langue.DireBonjour, sortie);
+        Assert.StartsWith(langue.Bonjour(periode), sortie);
     }
 
     [Theory(DisplayName = "ETANT DONNE un utilisateur parlant une langue" +
                           "QUAND l'app se ferme " +
                           "ALORS <auRevoir> dans cette langue est envoyé")]
     [MemberData(nameof(LanguesSeules))]
-    public void FermetureTest(ILangue langue)
+    public void FermetureTest(ILangue langue, PeriodeJournee periode)
     {
         // ETANT DONNE un utilisateur parlant une langue
         var ohce = new OhceBuilder()
@@ -86,6 +97,6 @@ public class OhceTest
         var sortie = ohce.Palindrome(string.Empty);
 
         // ALORS <auRevoir> dans cette langue est envoyé
-        Assert.EndsWith(langue.AuRevoir, sortie);
+        Assert.EndsWith(langue.AuRevoir(periode), sortie);
     }
 }

@@ -5,10 +5,12 @@ namespace OHCE;
 public class Ohce
 {
     private readonly ILangue _langue;
+    private readonly PeriodeJournee _periode;
 
-    public Ohce(ILangue langue)
+    public Ohce(ILangue langue, PeriodeJournee periode)
     {
         _langue = langue;
+        _periode = periode;
     }
 
     public string Palindrome(string input)
@@ -33,11 +35,11 @@ public class Ohce
 
     public string Bonjour()
     {
-        return _langue.Bonjour;
+        return _langue.Bonjour(_periode);
     }
 
     public string AuRevoir()
     {
-        return _langue.AuRevoir;
+        return _langue.AuRevoir(_periode);
     }
 }

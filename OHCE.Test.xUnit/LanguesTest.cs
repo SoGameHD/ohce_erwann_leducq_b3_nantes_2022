@@ -5,19 +5,23 @@ namespace OHCE.Test.xUnit
     public class LanguesTest
     {
         [Theory]
-        [InlineData(PériodeJournée.Soir, Expressions.Français.Bonsoir)]
-        [InlineData(PériodeJournée.Matin, Expressions.Français.Bonjour)]
-        public void DireBonjourTest(PériodeJournée période, string salutationAttendue)
+        [InlineData(PeriodeJournee.Soir, Expressions.Français.Bonsoir)]
+        [InlineData(PeriodeJournee.Matin, Expressions.Français.Bonjour)]
+        public void BonjourTest(PeriodeJournee periode, string salutationAttendue)
         {
-            // ETANT DONNE la langue française
-            // ET une période de la journée <période>
             var langue = new LangueFrançaise();
-
-            // QUAND je dis bonjour
-            var salutation = langue.DireBonjour(période);
-
-            // ALORS on me répond <salutationAttendue>
+            var salutation = langue.Bonjour(periode);
             Assert.Equal(salutationAttendue, salutation);
+        }
+
+        [Theory]
+        [InlineData(PeriodeJournee.Soir, Expressions.Français.auRevoirSoir)]
+        [InlineData(PeriodeJournee.Matin, Expressions.Français.AuRevoir)]
+        public void AuRevoirTest(PeriodeJournee periode, string salutationAttendue)
+        {
+            var langue = new LangueFrançaise();
+            var auRevoir = langue.AuRevoir(periode);
+            Assert.Equal(salutationAttendue, auRevoir);
         }
     }
 }

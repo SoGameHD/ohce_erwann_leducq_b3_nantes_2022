@@ -14,9 +14,11 @@ namespace OHCE
             public const string Bonjour = "Bonjour";
             public const string AuRevoir = "Au revoir";
             public const string Bonsoir = "Bonsoir";
+            public const string auRevoirSoir = "Bonne soirée";
             public const string useLanguage = "Langue utilisée";
             public const string reverseWord = "Mot inversé";
             public const string enterString = "Entrez un mot pour déterminer si c'est un palindrome";
+            public const string periode = "Période de la journée";
         }
 
         public static class English
@@ -25,9 +27,11 @@ namespace OHCE
             public const string Bonjour = "Hello";
             public const string AuRevoir = "Goodbye";
             public const string Bonsoir = "Good evening";
+            public const string auRevoirSoir = "Bonne night";
             public const string useLanguage = "Used language";
             public const string reverseWord = "Reverse Word";
             public const string enterString = "Enter a word to determine if it is a palindrome";
+            public const string periode = "Period of the day";
         }
     }
 }

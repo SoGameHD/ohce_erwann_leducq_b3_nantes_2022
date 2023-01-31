@@ -1,6 +1,6 @@
 ﻿namespace OHCE
 {
-    public enum PériodeJournée
+    public enum PeriodeJournee
     {
         Defaut,
         Matin,
