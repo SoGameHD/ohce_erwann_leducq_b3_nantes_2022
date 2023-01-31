@@ -65,7 +65,7 @@ public class OhceTest
                           "ET que la période de la journée est <période>" +
                           "QUAND l'app démarre " +
                           "ALORS <bonjour> de cette langue à cette période est envoyé")]
-    [MemberData(nameof(LanguesSeules))]
+    [MemberData(nameof(LanguesEtPériodes))]
     public void DémarrageTest(ILangue langue, PeriodeJournee periode)
     {
         // ETANT DONNE un utilisateur parlant une langue
@@ -85,7 +85,7 @@ public class OhceTest
     [Theory(DisplayName = "ETANT DONNE un utilisateur parlant une langue" +
                           "QUAND l'app se ferme " +
                           "ALORS <auRevoir> dans cette langue est envoyé")]
-    [MemberData(nameof(LanguesSeules))]
+    [MemberData(nameof(LanguesEtPériodes))]
     public void FermetureTest(ILangue langue, PeriodeJournee periode)
     {
         // ETANT DONNE un utilisateur parlant une langue
