@@ -1,15 +1,30 @@
-﻿namespace OHCE.Console.Adapters
+﻿namespace OHCE.Console;
+
+public class SystemTimePeriodeJourneeAdapter
 {
-    internal static class SystemTimePériodeJournéeAdapter
+    public readonly PeriodeJournee PeriodeActuelle;
+    public SystemTimePeriodeJourneeAdapter()
     {
-        public static PériodeJournée PériodeActuelle
-            => DateTime.Now.Hour switch
-               {
-                   < 6  => PériodeJournée.Nuit,
-                   < 12 => PériodeJournée.Matin,
-                   < 18 => PériodeJournée.AprèsMidi,
-                   < 21 => PériodeJournée.Soir,
-                   _    => PériodeJournée.Nuit
-               };
+        int hour = DateTime.Now.Hour;
+        if (hour <= 7)
+        {
+            PeriodeActuelle = PeriodeJournee.Nuit;
+        }
+        else if (hour <= 12)
+        {
+            PeriodeActuelle = PeriodeJournee.Matin;
+        }
+        else if (hour <= 17)
+        {
+            PeriodeActuelle = PeriodeJournee.AprèsMidi;
+        }
+        else if (hour <= 23)
+        {
+            PeriodeActuelle = PeriodeJournee.Soir;
+        }
+        else
+        {
+            PeriodeActuelle = PeriodeJournee.Defaut;
+        }
     }
 }
