@@ -14,6 +14,6 @@
         public string useLanguage => Expressions.English.useLanguage;
         public string enterString => Expressions.English.enterString;
         public string reverseWord => Expressions.English.reverseWord;
-        public string Periode => Expressions.English.periode;
+        public string periode => Expressions.English.periode;
     }
 }
